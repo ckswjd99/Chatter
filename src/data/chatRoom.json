@@ -3,8 +3,11 @@
     "rooms": [
         {
             "pk": 1,
-            "name": "공지방",
-            "type": 0
+            "name": "Announcement",
+            "master": "ckswjd99",
+            "type": "ANNOUNCE",
+            "private": false,
+            "password": ""
         }
     ]
 }
