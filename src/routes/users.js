@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 
 const fs = require("fs");
+const crypto = require('crypto')
 
 /* GET users listing. */
 router.get("/", function (req, res, next) {
@@ -24,22 +25,32 @@ router.post("/signIn", function (req, res) {
     const findUserById = userList.users.find((ul) => ul.id == loginId);
 
     /* LOGIN SUCCEED */
-    if (findUserById !== undefined && findUserById.hashedPw == loginPw) {
-      req.session.user = {
-        id: findUserById.id,
-        name: findUserById.name,
-      };
-      console.log(findUserById.name, " logined");
-      res.redirect("/");
+    if (findUserById !== undefined) {
+      crypto.pbkdf2(loginPw, findUserById.salt, 104831, 64, 'sha512', (err, key) => {
+        console.log(findUserById.hashedPw)
+        console.log(key.toString('base64'))
+        if(key.toString('base64') === findUserById.hashedPw) {
+          req.session.user = {
+            id: findUserById.id,
+            name: findUserById.name,
+          };
+          console.log(findUserById.name, " logined");
+          res.redirect("/");
+          return;
+        }
+        else {
+          res.render("error", { errorMsg: "LoginFailed" })
+          return;
+        }
+      });
     } else {
-
     /* LOGIN FAILED */
       res.render("error", { errorMsg: "LoginFailed" });
     }
   }
 });
 
-router.post("/signUp", function (req, res) {
+router.post("/signUp", async function (req, res) {
   if (req.session.user) {
     res.render("error", { errorMsg: "AlreadySignIn" });
   } else {
@@ -66,18 +77,23 @@ router.post("/signUp", function (req, res) {
       const originalUserData = JSON.parse(
         fs.readFileSync(__dirname + "/../data/user.json").toString()
       );
-      originalUserData.users.push({
-        pk: originalUserData.totalNum + 1,
-        id: signUpId,
-        hashedPw: signUpPw,
-        salt: "",
-        name: signUpName,
+
+      crypto.randomBytes(64, (err, buf) => {
+        crypto.pbkdf2(signUpPw, buf.toString('base64'), 104831, 64, 'sha512', (err, key) => {
+          originalUserData.users.push({
+            pk: originalUserData.totalNum + 1,
+            id: signUpId,
+            hashedPw: key.toString('base64'),
+            salt: buf.toString('base64'),
+            name: signUpName,
+          });
+          originalUserData.totalNum = originalUserData.totalNum + 1;
+          fs.writeFileSync(
+            __dirname + "/../data/user.json",
+            JSON.stringify(originalUserData)
+          );
+        });
       });
-      originalUserData.totalNum = originalUserData.totalNum + 1;
-      fs.writeFileSync(
-        __dirname + "/../data/user.json",
-        JSON.stringify(originalUserData)
-      );
       res.render("success", { msg: "SignUp Success" });
     }
   }
