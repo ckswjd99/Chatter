@@ -4,12 +4,21 @@ var router = express.Router();
 const fs = require("fs");
 const crypto = require('crypto')
 
+const { rank, rankToString } = require('../entity/rank')
+
 /* GET users listing. */
 router.get("/", function (req, res, next) {
   const { users: userList } = JSON.parse(
     fs.readFileSync(__dirname + "/../data/user.json").toString()
   );
-  res.render("userList.ejs", { userList });
+  res.render("userList.ejs", {
+    userList: userList.map(function(ulm) {
+      return {
+        rank: rankToString(ulm.rank),
+        userName: ulm.name
+      }
+    })
+  });
 });
 
 router.post("/signIn", function (req, res) {
@@ -27,12 +36,11 @@ router.post("/signIn", function (req, res) {
     /* LOGIN SUCCEED */
     if (findUserById !== undefined) {
       crypto.pbkdf2(loginPw, findUserById.salt, 104831, 64, 'sha512', (err, key) => {
-        console.log(findUserById.hashedPw)
-        console.log(key.toString('base64'))
         if(key.toString('base64') === findUserById.hashedPw) {
           req.session.user = {
             id: findUserById.id,
             name: findUserById.name,
+            rank: rankToString(findUserById.rank)
           };
           console.log(findUserById.name, " logined");
           res.redirect("/");
@@ -86,6 +94,7 @@ router.post("/signUp", async function (req, res) {
             hashedPw: key.toString('base64'),
             salt: buf.toString('base64'),
             name: signUpName,
+            rank: rank.NORMAL
           });
           originalUserData.totalNum = originalUserData.totalNum + 1;
           fs.writeFileSync(

@@ -6,14 +6,16 @@
       "id": "ckswjd99",
       "hashedPw": "CmDOkYIQ6Emq1chP1SDhdK1yxwp67GJZfvbi6CEWY2eQuAr67DtpByDJE3YMNpEU6uq64fdMJPVW3dC84sC/tg==",
       "salt": "19E+ewYWOuTezuJWmJ1M9n/kg4eZ6tMxE5gYsUSN8Rwbhv/cwqj+mrMsYgkaR2Wh0fzcotGYWJIl9TyNU74uOQ==",
-      "name": "박찬정"
+      "name": "박찬정",
+      "rank": 0
     },
     {
       "pk": 2,
       "id": "testman123",
       "hashedPw": "eOD2dXvp6gXs+IOeKrz6e8D5/+/V/Yvks/kneCUikFljiOqY3rFwLlfKBCXatoU4Ru5+OKQj+1fhWAbOPscXiA==",
       "salt": "TO3jKUURznBc5LFpr5u90Im2cMYsZsLx8Ce3M+qxslSCn/HVa3MynUP2pQtBU84dABdGlAPHRLC/+amRWjCPVA==",
-      "name": "테스트맨"
+      "name": "테스트맨",
+      "rank": 2
     }
   ]
 }
