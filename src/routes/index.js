@@ -18,4 +18,8 @@ router.get('/', function(req, res, next) {
   
 });
 
+router.get('/socket.io/socket.io.js', (req, res) => {
+  res.sendFile(__dirname + '../entity/socket.io.js')
+})
+
 module.exports = router;

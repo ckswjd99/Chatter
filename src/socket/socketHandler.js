@@ -1,14 +1,33 @@
 const fs = require("fs");
 
-function socketHandler (socket) {
-    console.log("socket in: ", socket.handshake.session.user)
-    let chatRoomName = ""
-    socket.on('enterChatRoom', (msg) => {
-        const roomList = JSON.parse(
-            fs.readFileSync(__dirname + "/../data/chatRoom.json").toString()
-        )
-        const findRoomByName = roomList.find((rlf) => {rlf.name == msg})
-    })
+function socketHandler (io) {
+    return function(socket) {
+        const session = socket.request.session;
+        const user = session.user;
+        let roomName;
+
+        socket.on('Enter Room', (rn) => {
+            roomName = rn;
+            socket.join(rn);
+            console.log(user, "joined ", rn)
+        })
+        
+        socket.on('Chat', (chatie) => {
+            if(!roomName) {
+                socket.emit('Chat', {
+                    userName: "SYSTEM",
+                    msg: "Yet to Join a Room."
+                })
+            }
+            else{
+                io.to(roomName).emit('Chat', {
+                    userName: user.name,
+                    msg: chatie.msg
+                })            
+            }
+            
+        })
+    }
 }
 
-exports.socketHandler = socketHandler
+module.exports = socketHandler

@@ -14,6 +14,7 @@
     </style>
   </head>
   <body>
+    <input type="hidden" id="roomName" value=<%= room.name %>>
     <ul id="messages"></ul>
     <form action="">
       <input id="m" autocomplete="off" /><button>Send</button>
@@ -23,14 +24,19 @@
     <script>
         $(function() {
             var socket = io()
+            socket.emit('Enter Room', $('#roomName').val())
+            
             $('form').on('submit', function(e) {
                 e.preventDefault()
-                socket.emit('chat message', $('#m').val())
+                socket.emit('Chat', {
+                    msg: $('#m').val()
+                })
                 $('#m').val('')
                 return false
             })
-            socket.on('chat message', function(msg){
-                $('#messages').append($('<li>').text(msg))
+            socket.on('Chat', function(chatie){
+                console.log(chatie)
+                $('#messages').append($('<li>').text(chatie.userName + ": " + chatie.msg))
             })
         })
     </script>

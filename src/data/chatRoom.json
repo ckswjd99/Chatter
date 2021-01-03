@@ -8,6 +8,14 @@
             "type": "ANNOUNCE",
             "private": false,
             "password": ""
+        },
+        {
+            "pk": 2,
+            "name": "Square",
+            "master": "ckswjd99",
+            "type": "ANNOUNCE",
+            "private": false,
+            "password": ""
         }
     ]
 }

@@ -4,7 +4,8 @@
  * Module dependencies.
  */
 
-var app = require('../app');
+var apps = require('../app');
+var app = apps.app;
 var debug = require('debug')('chatter:server');
 var http = require('http');
 
@@ -20,6 +21,17 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+
+/**
+ * Socket.io Setting
+ */
+const io = require('socket.io')(server);
+
+io.use((socket, next) => {
+  apps.sessionMiddleware(socket.request, {}, next);
+})
+const socketHandler = require('../socket/socketHandler');
+io.on('connection', socketHandler(io));
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -89,15 +101,6 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 
-/**
- * Socket.io Setting
- */
-const io = require('socket.io')(server);
-const sharedSession = require('express-socket.io-session');
-const session = require('../app').session;
-io.use(sharedSession(session));
 
-const { socketHandler } = require('../socket/socketHandler');
-io.on('connection', socketHandler);
 
 

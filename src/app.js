@@ -8,6 +8,7 @@ var expressSession = require('express-session')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var chatRoomRouter = require('./routes/chatRoom');
+const session = require('express-session');
 
 var app = express();
 
@@ -21,13 +22,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const session = expressSession({
+const sessionMiddleware = expressSession({
   secret: '#@!MYSECRET!@#',
-  resave: false,
-  saveUninitialized: false
+  resave: true,
+  saveUninitialized: true
 });
 
-app.use(session);
+app.use(sessionMiddleware);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -49,5 +50,7 @@ app.use(function(err, req, res, next) {
   res.render('error', { errorMsg: "Unknown Error" });
 });
 
-module.exports = app;
-exports.session = session;
+module.exports = {
+  app: app,
+  sessionMiddleware: sessionMiddleware
+};
