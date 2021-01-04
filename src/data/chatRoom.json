@@ -1,45 +1,5 @@
 {
-  "totalNum": 5,
+  "totalNum": 0,
   "rooms": [
-    {
-      "pk": 1,
-      "name": "Announcement",
-      "master": "ckswjd99",
-      "type": "ANNOUNCE",
-      "private": false,
-      "password": ""
-    },
-    {
-      "pk": 2,
-      "name": "Square",
-      "master": "ckswjd99",
-      "type": "ANNOUNCE",
-      "private": false,
-      "password": ""
-    },
-    {
-      "pk": 3,
-      "name": "NewRoom123",
-      "master": "ckswjd99",
-      "type": "FREE",
-      "private": false,
-      "password": ""
-    },
-    {
-      "pk": 4,
-      "name": "NewRoom1234",
-      "master": "ckswjd99",
-      "type": "FREE",
-      "private": false,
-      "password": ""
-    },
-    {
-      "pk": 5,
-      "name": "PrivateRoom",
-      "master": "ckswjd99",
-      "type": "FREE",
-      "private": true,
-      "password": "1234"
-    }
   ]
 }

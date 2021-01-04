@@ -54,6 +54,11 @@ router.post("/create", function(req, res) {
             const roomList = JSON.parse(
                 fs.readFileSync(__dirname + "/../data/chatRoom.json").toString()
             );
+
+            const findRoomByName = roomList.rooms.find((rl) => rl.name == roomName);
+            if(findRoomByName){
+                res.render("error", { errorMsg: "Room Name Already Exists" })
+            }
     
             roomList.rooms.push({
                 "pk": (roomList.totalNum + 1),
