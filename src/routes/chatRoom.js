@@ -24,11 +24,22 @@ router.get("/", function (req, res) {
             }
             else{
                 if(!findRoomByName.private) {
+                    req.session.user.roomName = roomName
                     res.render("chatRoom", { room: findRoomByName })
                     return
                 }
                 else if(findRoomByName.private && req.query.password == findRoomByName.password) {
-                    console.log("good")
+                    req.session.user.roomName = roomName
+                    res.render("chatRoom", { room: findRoomByName })
+                    return
+                }
+                else if(findRoomByName.private && req.session.user.name == findRoomByName.master) {
+                    req.session.user.roomName = roomName
+                    res.render("chatRoom", { room: findRoomByName })
+                    return
+                }
+                else if(req.session.user.rank == rank.ADMIN) {
+                    req.session.user.roomName = roomName
                     res.render("chatRoom", { room: findRoomByName })
                     return
                 }
