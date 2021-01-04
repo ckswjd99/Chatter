@@ -4,13 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    </style>
 </head>
 <body>
-    <h1>Chatroom</h1>
+    <h1>User Page</h1>
     <%= rank %>
     <%= userName %>
     <form action="/users/signOut" method="post">
         <button>Log Out</button>
     </form>
+    <h1>Join Chatroom</h1>
+    <form action="/chatRoom" method="get">
+        <input type="text" name="name" placeholder="ROOM NAME">
+        <input type="password" name="password" placeholder="PASSWORD">
+        <button>Join</button>
+    </form>
+    <h1>Create Chatroom</h1>
+    <form action="/chatRoom/create" method="post">
+        <input type="text" name="roomName" placeholder="ROOM NAME">
+        <input type="radio" name="type" value="FREE" checked="checked">Free
+        <input type="radio" name="type" value="ANNOUNCEMENT">Announcement
+        <input type="checkbox" name="isPrivate" value="PRIVATE">PRIVATE
+        <input type="password" name="password" placeholder="PASSWORD">
+        <button>Create</button>
+    </form>
+    <h1>Room List</h1>
+    <ul>
+        <% for(let i=0; i<rooms.length; i++) { %>
+            <li><a href="/chatroom?name=<%= rooms[i].name %>"><strong><%= rooms[i].name %></strong> by <%=rooms[i].master%></a></li>
+        <% } %>
+    </ul>
 </body>
 </html>
