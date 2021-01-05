@@ -84,7 +84,7 @@ router.post("/create", function(req, res) {
     
             fs.writeFileSync(__dirname + "/../data/chatRoom.json", JSON.stringify(roomList));
             
-            res.redirect("/chatRoom?name="+"roomName")
+            res.render("success", { msg: "SignUp Success", link: `/chatRoom?name=${roomName}` });
         }
         else {
             res.render("error", { errorMsg: "Login First" })

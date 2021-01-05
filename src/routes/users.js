@@ -103,7 +103,7 @@ router.post("/signUp", async function (req, res) {
           );
         });
       });
-      res.render("success", { msg: "SignUp Success" });
+      res.render("success", { msg: "SignUp Success", link: "/" });
     }
   }
 });
