@@ -1,6 +1,8 @@
 const fs = require('fs');
 const { rank } = require('../entity/rank');
 
+let roomClients = {}
+
 function socketHandler (io) {
     return function(socket) {
         const session = socket.request.session;
@@ -15,7 +17,15 @@ function socketHandler (io) {
                     userName: "SYSTEM",
                     msg: `user ${user.name} entered!`
                 })
-                console.log(user, "joined ", rn)
+                
+                if(roomClients[rn] === undefined) {
+                    roomClients[rn] = [user.name]
+                }
+                else{
+                    roomClients[rn].push(user.name)
+                }
+                console.log(roomClients)
+                io.to(room.name).emit('Update Members', roomClients[rn])
             }
             else {
                 console.log(user, "Illegal Attempt")
@@ -42,6 +52,21 @@ function socketHandler (io) {
                 })
             }
             
+        })
+
+        socket.on('disconnect', () => {
+            if(room){
+                io.to(room.name).emit('Chat', {
+                    userName: "SYSTEM",
+                    msg: `user ${user.name} left!`
+                })
+                
+                const userIndex = roomClients[room.name].indexOf(user.name)
+                roomClients[room.name].splice(userIndex, 1)
+                console.log(roomClients)
+
+                io.to(room.name).emit('Update Members', roomClients[room.name])
+            }
         })
     }
 }

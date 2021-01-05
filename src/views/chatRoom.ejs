@@ -11,12 +11,14 @@
       #messages { list-style-type: none; margin: 0; padding: 0; }
       #messages li { padding: 5px 10px; }
       #messages li:nth-child(odd) { background: #eee; }
+      #members { list-style: none; display: inline-block; }
+      #members li { float: left; padding-left: 5px; }
     </style>
   </head>
   <body>
     <input type="hidden" id="roomName" value=<%= room.name %>>
     <h1><%= room.name %></h1>
-    <h2>Room Type: <%= room.type %> Master: <%= room.master %></h2>
+    <h2>Room Type: <%= room.type %>, Master: <%= room.master %>, Members: <ul id="members"></ul></h2>
     <ul id="messages"></ul>
     <form action="">
       <input id="m" autocomplete="off" /><button>Send</button>
@@ -24,23 +26,29 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script>
-        $(function() {
-            var socket = io()
-            socket.emit('Enter Room', $('#roomName').val())
-            
-            $('form').on('submit', function(e) {
-                e.preventDefault()
-                socket.emit('Chat', {
-                    msg: $('#m').val()
-                })
-                $('#m').val('')
-                return false
-            })
-            socket.on('Chat', function(chatie){
-                console.log(chatie)
-                $('#messages').append($('<li>').text(chatie.userName + ": " + chatie.msg))
-            })
-        })
+      $(function() {
+          var socket = io()
+          socket.emit('Enter Room', $('#roomName').val())
+          
+          $('form').on('submit', function(e) {
+              e.preventDefault()
+              socket.emit('Chat', {
+                  msg: $('#m').val()
+              })
+              $('#m').val('')
+              return false
+          })
+          socket.on('Chat', function(chatie){
+              $('#messages').append($('<li>').text(chatie.userName + ": " + chatie.msg))
+          })
+          socket.on('Update Members', function(members){
+              console.log("UM")
+              document.querySelector('#members').innerHTML = ""
+              for(let i=0; i<members.length; i++){
+                  $('#members').append($('<li>').text(members[i]))
+              }
+          })
+      })
     </script>
   </body>
 </html>
