@@ -1,5 +1,5 @@
 # Chatter
-Chat Server without Chat Record
+Open Source Chat Server
 
 * Create accounts, passwords will be automatically encrypted.
 * Create chat rooms with several options.
