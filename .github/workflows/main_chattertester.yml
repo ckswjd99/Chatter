@@ -11,6 +11,8 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      working-directory: ./src
 
     steps:
     - uses: actions/checkout@master
@@ -25,6 +27,7 @@ jobs:
         npm install
         npm run build --if-present
         npm run test --if-present
+      working-directory: ${{ env.working-directory }}
 
     - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v2
@@ -32,4 +35,4 @@ jobs:
         app-name: 'chattertester'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_17233307a5d040bfa1aa9f84ee2bf86e }}
-        package: .
+        package: ./src/dist
