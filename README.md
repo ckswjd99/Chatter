@@ -1,5 +1,7 @@
 # Chatter
-Open Source Chat Server
+Open Source Chat Server.
+
+## Feature
 
 * Create accounts, passwords will be automatically encrypted.
 * Create chat rooms with several options.
@@ -10,8 +12,8 @@ Open Source Chat Server
 In your Linux or Windows server, clone this repository and move to `/src` where server codes exist.
 
 ```
-git clone https://github.com/ckswjd99/Chatter
-cd src
+$ git clone https://github.com/ckswjd99/Chatter
+$ cd src
 ```
 
 Start server using npm: `npm start`,
