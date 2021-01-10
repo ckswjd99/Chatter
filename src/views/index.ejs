@@ -4,24 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chatter - Welcome!</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="stylesheets/index.css">
 </head>
 <body>
-  <h1>Login</h1>
-  <div>
-    <form action="/users/signIn" method="post">
-      <input type="text" name="id" placeholder="ID">
-      <input type="password" name="pw" placeholder="PW">
-      <button>Login</button>
-    </form>
+  <div id="wrapper">
+    <header>
+      <div class="title-01">>> Chatter_</div>
+    </header>
+    <div id="content">
+      <section id="login" class="box">
+        <div class="title-02">Log In</div>
+        <form action="/users/signIn" method="post">
+          <input type="text" name="id" placeholder="ID">
+          <input type="password" name="pw" placeholder="PW">
+          <button>Enter</button>
+        </form>
+      </section>
+      <section id="signup" class="box">
+        <div class="title-02">Sign Up</div>
+        <form action="/users/signUp" method="post">
+          <input type="text" name="name" placeholder="NAME">
+          <input type="text" name="id" placeholder="ID">
+          <input type="password" name="pw" placeholder="PW">
+          <button>Register</button>
+        </form>
+      </section>
+    </div>
   </div>
-  <h1>Sign Up</h1>
-  <div>
-    <form action="/users/signUp" method="post">
-      <input type="text" name="name" placeholder="NAME">
-      <input type="text" name="id" placeholder="ID">
-      <input type="password" name="pw" placeholder="PW">
-      <button>Sign Up</button>
-    </form>
-  </div>
+  <footer>
+    <a href="https://github.com/ckswjd99/Chatter">Powered by Chatter</a>
+  </footer>
 </body>
 </html>
