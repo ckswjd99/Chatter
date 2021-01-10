@@ -3,7 +3,17 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "build": "pkg ."
+  },
+  "bin": {
+    "app": "./bin/www"
+  },
+  "pkg":{
+    "assets": [
+      "views/**/*",
+      "public/**/*"
+    ]
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -16,5 +26,8 @@
     "pug": "2.0.0-beta11",
     "session.socket.io": "^0.2.1",
     "socket.io": "^3.0.4"
+  },
+  "devDependencies": {
+    "pkg": "^4.4.9"
   }
 }
