@@ -35,4 +35,4 @@ jobs:
         app-name: 'chattertester'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_17233307a5d040bfa1aa9f84ee2bf86e }}
-        package: ./src/dist/chatter-linux
+        package: ./src/
