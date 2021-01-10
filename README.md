@@ -1,5 +1,7 @@
 # Chatter
-Open Source Chat Server. [Go&Test](http://chat.5iq.cc)
+Open Source Chat Server.
+
+[Go&Test](http://chat.5iq.cc)
 
 ## Feature
 
