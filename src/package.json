@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "build": "pkg ."
+    "build": "pkg . --out-path dist"
   },
   "bin": {
     "app": "./bin/www"
@@ -12,7 +12,8 @@
   "pkg":{
     "assets": [
       "views/**/*",
-      "public/**/*"
+      "public/**/*",
+      "data/**/*"
     ]
   },
   "dependencies": {
