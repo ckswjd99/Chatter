@@ -1,5 +1,6 @@
 :root {
     --main-bg-color: #A593E0;
+    --main-white-color: #FFFFFA;
     --main-content1-color: #FFFFF3;
     --main-content2-color: #E0E3DA;
     --main-dark-color: #566270;
@@ -13,7 +14,7 @@ body {
 }
 
 #wrapper {
-    background-color: var(--main-content1-color);
+    background-color: var(--main-white-color);
     color: var(--main-dark-color);
     width: 720px;
     border-radius: 12px;
@@ -71,7 +72,7 @@ form {
 }
 
 input {
-    background-color: var(--main-content2-color);
+    background-color: var(--main-content1-color);
     height: 20px;
     border-radius: 12px;
     border: 1px solid var(--main-content2-color);
