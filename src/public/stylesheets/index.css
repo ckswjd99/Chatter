@@ -83,6 +83,10 @@ input {
     color: var(--main-dark-color);
 }
 
+input:focus {
+    outline: none;
+}
+
 button {
     background-color: var(--main-dark-color);
     color: var(--main-content2-color);
@@ -95,6 +99,7 @@ button {
     font-family: 'Roboto Slab', serif;
     letter-spacing: 1px;
     transition: ease-in-out .1s;
+    cursor: pointer;
 }
 
 button:hover {
@@ -102,6 +107,10 @@ button:hover {
     color: var(--main-dark-color);
     border: 2px solid var(--main-dark-color);
     box-sizing: content-box;
+}
+
+button:focus {
+    outline: none;
 }
 
 footer {

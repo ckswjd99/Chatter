@@ -140,6 +140,10 @@ form input {
     margin-right: 4px;
 }
 
+form input:focus {
+    outline: none;
+}
+
 form button {
     width: 120px;
     background: var(--main-content2-color);
