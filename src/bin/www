@@ -101,6 +101,23 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 
+/**
+ * Check Data Folder Existance
+ */
+
+const fs = require('fs')
+const dataDir = fs.existsSync(__dirname + "/../data")
+if (!dataDir) {
+  console.log("Init Data Folder")
+  const userDefault = {totalNum:0, users:[]}
+  const roomDefault = {totalNum:0, rooms:[]}
+  fs.mkdirSync(__dirname + "/../data", { recursive: true })
+  fs.writeFileSync(__dirname + "/../data/user.json", JSON.stringify(userDefault))
+  fs.writeFileSync(__dirname + "/../data/chatRoom.json", JSON.stringify(roomDefault))
+}
+
+
+
 
 
 
