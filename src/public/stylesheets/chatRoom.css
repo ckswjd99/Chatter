@@ -102,14 +102,11 @@ header #room-member div {
 
 section {
     flex: 1;
-}
-
-section div {
-    overflow: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 #messages {
-    height: min-content;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -119,6 +116,7 @@ section div {
 #messages li {
     width: fit-content;
     padding: 5px 10px;
+    margin-bottom: 5px;
     border: 2px solid var(--main-content2-color);
     border-radius: 50vh;
     background: var(--main-content1-color);

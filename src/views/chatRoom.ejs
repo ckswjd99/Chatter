@@ -38,29 +38,6 @@
     
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script>
-      $(function() {
-          var socket = io()
-          socket.emit('Enter Room', $('#roomName').val())
-          
-          $('form').on('submit', function(e) {
-              e.preventDefault()
-              socket.emit('Chat', {
-                  msg: $('#m').val()
-              })
-              $('#m').val('')
-              return false
-          })
-          socket.on('Chat', function(chatie){
-              $('#messages').append($('<li>').text(chatie.userName + ": " + chatie.msg))
-          })
-          socket.on('Update Members', function(members){
-              document.querySelector('#members').innerHTML = ""
-              for(let i=0; i<members.length; i++){
-                  $('#members').append($('<li>').text(members[i]))
-              }
-          })
-      })
-    </script>
+    <script src="/js/chatRoom.js"></script>
   </body>
 </html>
