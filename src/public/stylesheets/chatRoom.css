@@ -1,0 +1,151 @@
+:root {
+    --main-bg-color: #A593E0;
+    --main-white-color: #FFFFFA;
+    --main-content1-color: #FFFFF3;
+    --main-content2-color: #E0E3DA;
+    --main-dark-color: #566270;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Roboto Slab', sans-serif;
+    background-color: var(--main-bg-color);
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    
+    display: flex;
+    align-items: stretch;
+}
+
+nav {
+    padding: 10px;
+    width: 220px;
+}
+
+#logo a {
+    text-decoration: none;
+    color: var(--main-content1-color);
+    font-size: 32px;
+    margin-left: 8px;
+}
+
+#container {
+    flex: 1;
+    background-color: white;
+    border-radius: 16px 0 0 16px;
+    padding: 8px 20px;
+    max-height: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    justify-content: start;
+    margin-bottom: 12px;
+}
+
+header #room-name {
+    font-size: 50px;
+    margin-left: 12px;
+    margin-right: 64px;
+}
+
+header #room-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 8px 0;
+    margin-right: 32px;
+}
+
+header #room-info div {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+}
+
+header #room-info div span {
+    margin-right: 20px;
+}
+
+header #room-info div span:nth-child(1) {
+    font-weight: 900;
+}
+
+header #room-member {
+    padding: 8px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+header #room-member div {
+    font-size: 18px;
+    font-weight: 900;
+}
+
+#members {
+    list-style: none;
+    display: inline-block;
+}
+
+#members li {
+    float: left;
+    padding: 0px;
+    margin-right: 12px;
+    font-size: 18px;
+}
+
+section {
+    flex: 1;
+}
+
+section div {
+    overflow: auto;
+}
+
+#messages {
+    height: min-content;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+}
+
+#messages li {
+    width: fit-content;
+    padding: 5px 10px;
+    border: 2px solid var(--main-content2-color);
+    border-radius: 50vh;
+    background: var(--main-content1-color);
+    color: var(--main-dark-color);
+}
+
+form {
+    background: var(--main-dark-color);
+    padding: 3px;
+    height: 40px;
+    border-radius: 20px;
+
+    display: flex;
+}
+
+form input {
+    flex: 1;
+    border: 0;
+    border-radius: 20px;
+    padding: 10px;
+    margin-right: 4px;
+}
+
+form button {
+    width: 120px;
+    background: var(--main-content2-color);
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+}

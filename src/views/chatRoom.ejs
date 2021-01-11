@@ -2,27 +2,40 @@
 <html>
   <head>
     <title>ChatRoom <%= room.name %></title>
-    <style>
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font: 13px Helvetica, Arial; }
-      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-      form input { border: 0; padding: 10px; width: 90%; margin-right: 0.5%; }
-      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; }
-      #messages li { padding: 5px 10px; }
-      #messages li:nth-child(odd) { background: #eee; }
-      #members { list-style: none; display: inline-block; }
-      #members li { float: left; padding-left: 5px; }
-    </style>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="stylesheets/chatRoom.css">
   </head>
   <body>
+    <nav>
+      <div id="logo">
+        <a href="/">>> Chatter_</a>
+      </div>
+    </nav>
+    <div id="container">
+      <header>
+        <div id="room-name"><%= room.name %></div>
+        <div id="room-info">
+          <div><span>Type</span> <span><%= room.type %></span></div>
+          <div><span>Master</span> <span><%= room.master %></span></div>
+        </div>
+        <div id="room-member">
+          <div>Memebers</div>
+          <ul id="members"></ul>
+        </div>
+      </header>
+      <section>
+        <div>
+          <ul id="messages"></ul>
+        </div>
+        <form action="">
+          <input id="m" autocomplete="off" /><button>Send</button>
+        </form>
+      </section>
+    </div>
+
     <input type="hidden" id="roomName" value=<%= room.name %>>
-    <h1><%= room.name %></h1>
-    <h2>Room Type: <%= room.type %>, Master: <%= room.master %>, Members: <ul id="members"></ul></h2>
-    <ul id="messages"></ul>
-    <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
-    </form>
+    
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script>
@@ -42,7 +55,6 @@
               $('#messages').append($('<li>').text(chatie.userName + ": " + chatie.msg))
           })
           socket.on('Update Members', function(members){
-              console.log("UM")
               document.querySelector('#members').innerHTML = ""
               for(let i=0; i<members.length; i++){
                   $('#members').append($('<li>').text(members[i]))
