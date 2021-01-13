@@ -3,14 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap">
+  <link rel="stylesheet" href="/stylesheets/error.css">
   <title>Chatter - Error!</title>
 </head>
 <body>
-  <h1>Error Page</h1>
-  <% if (errorMsg) { %>
-    <%= errorMsg %>
-  <% } else { %>
-    Unknown Error
-  <% } %>
+  
+  <div class="container">
+    <h1>Error</h1>
+    <div>
+      <% if (errorMsg) { %>
+        <%= errorMsg %>
+      <% } else { %>
+        Unknown Error
+      <% } %>
+    </div>
+    <a href="/">Home</a>
+  </div>
+
 </body>
 </html>

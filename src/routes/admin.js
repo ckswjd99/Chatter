@@ -16,4 +16,8 @@ router.get("/success", function (req, res) {
     res.render("success", { msg: "test success", link: "/" })
 })
 
+router.get("/error", function (req, res) {
+    res.render("error", { errorMsg: "test Error" })
+})
+
 module.exports = router;
