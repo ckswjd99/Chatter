@@ -1,0 +1,7 @@
+# Create .env file filled with values below.
+
+# Port where server will listen
+PORT = 3000
+
+# Times of passwords hashed(encrypted): random number over 100,000 recommended.
+HASH_NUM = 111111

@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
+require('dotenv').config();
 const fs = require("fs");
 const crypto = require('crypto')
 
@@ -34,8 +35,10 @@ router.post("/signIn", function (req, res) {
     const findUserById = userList.users.find((ul) => ul.id == loginId);
 
     /* LOGIN SUCCEED */
+    const hashingNum = Number(process.env.HASH_NUM);
+
     if (findUserById !== undefined) {
-      crypto.pbkdf2(loginPw, findUserById.salt, 104831, 64, 'sha512', (err, key) => {
+      crypto.pbkdf2(loginPw, findUserById.salt, hashingNum, 64, 'sha512', (err, key) => {
         if(key.toString('base64') === findUserById.hashedPw) {
           req.session.user = {
             id: findUserById.id,
@@ -85,9 +88,11 @@ router.post("/signUp", async function (req, res) {
       const originalUserData = JSON.parse(
         fs.readFileSync(__dirname + "/../data/user.json").toString()
       );
+      
+      const hashingNum = Number(process.env.HASH_NUM);
 
       crypto.randomBytes(64, (err, buf) => {
-        crypto.pbkdf2(signUpPw, buf.toString('base64'), 104831, 64, 'sha512', (err, key) => {
+        crypto.pbkdf2(signUpPw, buf.toString('base64'), hashingNum, 64, 'sha512', (err, key) => {
           originalUserData.users.push({
             pk: originalUserData.totalNum + 1,
             id: signUpId,
