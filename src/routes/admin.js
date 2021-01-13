@@ -12,4 +12,8 @@ router.get("/", function (req, res, next) {
     }
 });
 
+router.get("/success", function (req, res) {
+    res.render("success", { msg: "test success", link: "/" })
+})
+
 module.exports = router;
