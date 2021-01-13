@@ -24,11 +24,30 @@ nav {
     width: 220px;
 }
 
-#logo a {
+nav #logo {
+    margin-bottom: 20px;
+}
+
+nav #logo a {
     text-decoration: none;
     color: var(--main-content1-color);
     font-size: 32px;
     margin-left: 8px;
+}
+
+nav ul {
+    list-style: none;
+    padding-left: 12px;
+}
+
+nav ul li {
+    font-size: 18px;
+    padding-bottom: 4px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--main-content2-color);
 }
 
 #container {

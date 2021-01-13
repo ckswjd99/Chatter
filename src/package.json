@@ -9,7 +9,7 @@
   "bin": {
     "app": "./bin/www"
   },
-  "pkg":{
+  "pkg": {
     "assets": [
       "views/**/*",
       "public/**/*",
