@@ -99,7 +99,7 @@ router.post("/signUp", async function (req, res) {
             hashedPw: key.toString('base64'),
             salt: buf.toString('base64'),
             name: signUpName,
-            rank: rank.NORMAL
+            rank: originalUserData.totalNum ? rank.NORMAL : rank.ADMIN
           });
           originalUserData.totalNum = originalUserData.totalNum + 1;
           fs.writeFileSync(
