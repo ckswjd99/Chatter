@@ -43,7 +43,7 @@ router.post("/signIn", function (req, res) {
           req.session.user = {
             id: findUserById.id,
             name: findUserById.name,
-            rank: rankToString(findUserById.rank)
+            rank: findUserById.rank
           };
           console.log(findUserById.name, " logined");
           res.redirect("/");

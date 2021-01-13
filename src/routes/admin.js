@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-const { rank } = require("../entity/rank");
+const { rank, rankToString } = require("../entity/rank");
 
 router.get("/", function (req, res, next) {
     if(req.session.user.rank == rank.ADMIN) {

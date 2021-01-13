@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs')
 
+const { rankToString } = require('../entity/rank')
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   try {
@@ -10,7 +12,7 @@ router.get('/', function(req, res, next) {
 
       const roomList = JSON.parse(fs.readFileSync(__dirname + "/../data/chatRoom.json").toString());
 
-      res.render('userPage', { userName: req.session.user.name, rank: req.session.user.rank, rooms: roomList.rooms } )
+      res.render('userPage', { userName: req.session.user.name, rank: rankToString(req.session.user.rank), rooms: roomList.rooms } )
     }
     else{
       res.render('index');
