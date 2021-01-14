@@ -20,7 +20,7 @@ body {
     margin-top: 30vh;
 
     background-color: var(--main-white-color);
-    width: 320px;
+    width: 480px;
     border-radius: 12px;
 
     text-align: center;
@@ -53,4 +53,10 @@ a {
     color: var(--main-dark-color);
     font-size: 18px;
     line-height: 27px;
+}
+
+@media screen and (max-width: 748px) {
+    .container {
+        width: 320px;
+    }
 }

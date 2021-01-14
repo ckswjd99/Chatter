@@ -13,7 +13,7 @@ router.get("/", function (req, res, next) {
 });
 
 router.get("/success", function (req, res) {
-    res.render("success", { msg: "test success", link: "/" })
+    res.render("success", { msg: "test success test success test success test success ", link: "/" })
 })
 
 router.get("/error", function (req, res) {
