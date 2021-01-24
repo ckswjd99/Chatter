@@ -36,6 +36,7 @@ router.post("/signIn", function (req, res) {
 
     /* LOGIN SUCCEED */
     const hashingNum = Number(process.env.HASH_NUM);
+    console.log(hashingNum)
 
     if (findUserById !== undefined) {
       crypto.pbkdf2(loginPw, findUserById.salt, hashingNum, 64, 'sha512', (err, key) => {

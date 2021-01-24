@@ -3,17 +3,17 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "node ./src/bin/www",
     "build": "pkg . --out-path dist"
   },
   "bin": {
-    "app": "./bin/www"
+    "app": "./src/bin/www"
   },
   "pkg": {
     "assets": [
-      "views/**/*",
-      "public/**/*",
-      "data/**/*"
+      "src/views/**/*",
+      "src/public/**/*",
+      "src/data/**/*"
     ]
   },
   "dependencies": {
