@@ -1,7 +1,7 @@
 # Chatter
 Open Source Chat Server.
 
-[Go&Test](http://chattertester.azurewebsites.net)
+[Go&Test](https://chatter-tester.herokuapp.com/)
 
 ## Feature
 
