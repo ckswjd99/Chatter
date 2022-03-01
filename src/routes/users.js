@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
+require('dotenv').config();
 const fs = require("fs");
 const crypto = require('crypto')
 
@@ -34,13 +35,16 @@ router.post("/signIn", function (req, res) {
     const findUserById = userList.users.find((ul) => ul.id == loginId);
 
     /* LOGIN SUCCEED */
+    const hashingNum = Number(process.env.HASH_NUM);
+    console.log(hashingNum)
+
     if (findUserById !== undefined) {
-      crypto.pbkdf2(loginPw, findUserById.salt, 104831, 64, 'sha512', (err, key) => {
+      crypto.pbkdf2(loginPw, findUserById.salt, hashingNum, 64, 'sha512', (err, key) => {
         if(key.toString('base64') === findUserById.hashedPw) {
           req.session.user = {
             id: findUserById.id,
             name: findUserById.name,
-            rank: rankToString(findUserById.rank)
+            rank: findUserById.rank
           };
           console.log(findUserById.name, " logined");
           res.redirect("/");
@@ -85,16 +89,18 @@ router.post("/signUp", async function (req, res) {
       const originalUserData = JSON.parse(
         fs.readFileSync(__dirname + "/../data/user.json").toString()
       );
+      
+      const hashingNum = Number(process.env.HASH_NUM);
 
       crypto.randomBytes(64, (err, buf) => {
-        crypto.pbkdf2(signUpPw, buf.toString('base64'), 104831, 64, 'sha512', (err, key) => {
+        crypto.pbkdf2(signUpPw, buf.toString('base64'), hashingNum, 64, 'sha512', (err, key) => {
           originalUserData.users.push({
             pk: originalUserData.totalNum + 1,
             id: signUpId,
             hashedPw: key.toString('base64'),
             salt: buf.toString('base64'),
             name: signUpName,
-            rank: rank.NORMAL
+            rank: originalUserData.totalNum ? rank.NORMAL : rank.ADMIN
           });
           originalUserData.totalNum = originalUserData.totalNum + 1;
           fs.writeFileSync(

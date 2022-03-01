@@ -1,5 +1,6 @@
 :root {
     --main-bg-color: #A593E0;
+    --main-white-color: #FFFFFA;
     --main-content1-color: #FFFFF3;
     --main-content2-color: #E0E3DA;
     --main-dark-color: #566270;
@@ -13,7 +14,7 @@ body {
 }
 
 #wrapper {
-    background-color: var(--main-content1-color);
+    background-color: var(--main-white-color);
     color: var(--main-dark-color);
     width: 720px;
     border-radius: 12px;
@@ -71,10 +72,10 @@ form {
 }
 
 input {
-    background-color: var(--main-content2-color);
+    background-color: var(--main-content1-color);
     height: 20px;
     border-radius: 12px;
-    border: 1px solid var(--main-content2-color);
+    border: 2px solid var(--main-content2-color);
     padding: 5px 10px;
     margin-bottom: 20px;
     font-size: 14px;
@@ -82,10 +83,14 @@ input {
     color: var(--main-dark-color);
 }
 
+input:focus {
+    outline: none;
+}
+
 button {
     background-color: var(--main-dark-color);
     color: var(--main-content2-color);
-    border: 1px solid var(--main-dark-color);
+    border: 2px solid var(--main-dark-color);
     border-radius: 12px;
     height: 20px;
     padding: 5px;
@@ -94,13 +99,18 @@ button {
     font-family: 'Roboto Slab', serif;
     letter-spacing: 1px;
     transition: ease-in-out .1s;
+    cursor: pointer;
 }
 
 button:hover {
-    background-color: var(--main-content2-color);
+    background-color: var(--main-content1-color);
     color: var(--main-dark-color);
-    border: 1px solid var(--main-dark-color);
+    border: 2px solid var(--main-dark-color);
     box-sizing: content-box;
+}
+
+button:focus {
+    outline: none;
 }
 
 footer {

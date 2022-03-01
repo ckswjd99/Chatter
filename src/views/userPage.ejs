@@ -15,6 +15,11 @@
     <h1>User Page</h1>
     <%= rank %>
     <%= userName %>
+    <% if(rank == "ADMIN") { %>
+        <form action="/admin" method="get">
+            <button>Admin Page</button>
+        </form>
+    <% } %>    
     <form action="/users/signOut" method="post">
         <button>Log Out</button>
     </form>
